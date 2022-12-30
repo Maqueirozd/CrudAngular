@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h1 class="text-center">Lista de Cartas</h1>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nome</th>
+            <th class="text-center">Ataque</th>
+            <th class="text-center">Defesa</th>
+            <th class="text-center">Tipo</th>
+            <th class="text-center">Classe</th>
+            <th class="text-center">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="text-center">{{ user.id }}</td>
+            <td class="text-center">{{ user.nome }}</td>
+            <td class="text-center">{{ user.ataque }}</td>
+            <td class="text-center">{{ user.defesa }}</td>
+            <td class="text-center">{{ user.tipo }}</td>
+            <td class="text-center">{{ user.classe }}</td>
+
+            <td class="text-center">
+              <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditUserForm(user)">Alterar</button>
+
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeUser(user)">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" (click)="showAddUserForm()">Adicionar Carta</button>
+
+      <div class="mt-4">
+        <form *ngIf="userForm">
+          <h2>Adicionar Carta</h2>
+          <p>Nome: <input type="text" name="nome" [(ngModel)]="newUser.nome" /></p>
+          <p>Ataque: <input type="number" name="ataque" min="1" max="10"[(ngModel)]="newUser.ataque" /></p>
+          <p>Defesa: <input type="number" name="defesa" min="1" max="10" [(ngModel)]="newUser.defesa" /></p>
+          <p>Tipo:     <input type="radio" name="tipo" value="magia" [(ngModel)]="newUser.tipo" />Magia    
+          <input type="radio" name="tipo" value="criatura"[(ngModel)]="newUser.tipo" />Criatura</p>
+          <p>Classe: <input type="radio" name="classe" value="mago" [(ngModel)]="newUser.classe" />Mago
+            <input type="radio" name="classe" value="paladino"[(ngModel)]="newUser.classe">Paladino
+            <input type="radio" name="classe" value="caçador"[(ngModel)]="newUser.classe">Caçador
+            <input type="radio" name="classe" value="druida"[(ngModel)]="newUser.classe">Druida
+            <input type="radio" name="classe" value="qualquer"[(ngModel)]="newUser.classe">Qualquer
+          </p>
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="saveUser(newUser)">Confirmar</button>
+            <button type="button" class="btn btn-warning" (click)="cancelNewUser()">Cancelar</button>
+          </p>
+        </form>
+
+        <form *ngIf="editUserForm">
+          <h2>Editar</h2>
+          <p>nome: <input type="text" name="nome" [(ngModel)]="editedUser.nome" /></p>
+            <p>Ataque: <input type="number" name="ataque" min="1" max="10"[(ngModel)]="editedUser.ataque" /></p>
+            <p>Defesa: <input type="number" name="defesa" min="1" max="10" [(ngModel)]="editedUser.defesa" /></p>
+            <p>Tipo:     <input type="radio" name="tipo" value="magia" [(ngModel)]="editedUser.tipo" />  Magia    
+            <input type="radio" name="tipo" value="criatura" [(ngModel)]="editedUser.tipo"/>  Criatura</p>
+            <p>Classe: <input type="radio" name="classe" value="mago" [(ngModel)]="editedUser.classe" />Mago
+              <input type="radio" name="classe" value="paladino" [(ngModel)]="editedUser.classe">Paladino
+              <input type="radio" name="classe" value="caçador" [(ngModel)]="editedUser.classe">Caçador
+              <input type="radio" name="classe" value="druida" [(ngModel)]="editedUser.classe">Druida
+              <input type="radio" name="classe" value="qualquer"[(ngModel)]="editedUser.classe">Qualquer
+            </p>
+
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="updateUser()">Confirmar</button>
+            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancelar</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
